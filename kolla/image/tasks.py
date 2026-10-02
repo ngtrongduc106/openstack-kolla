@@ -301,7 +301,7 @@ class BuildTask(EngineTask):
         def _test_malicious_tarball(archive, path):
             tar_file = tarfile.open(archive, 'r|*')
             for n in tar_file.getnames():
-                if not os.path.abspath(os.path.join(path, n)).startswith(path):
+                if not os.path.abspath(os.path.join(path, n)).startswith(os.path.abspath(path)):
                     tar_file.close()
                     self.logger.error(f'Unsafe filenames in archive {archive}')
                     raise ArchivingError
